@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found System - Find What Matters</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="gradient-bg"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+    <!-- Modern Glassmorphism Navigation -->
+    <nav class="navbar glass-nav">
+        <div class="container nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-search-location brand-icon"></i>
+                <span class="brand-text">Lost<span class="brand-highlight">&Found</span></span>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="#browse" class="nav-link"><i class="fas fa-th-large"></i> Browse</a>
+                <a href="#report" class="nav-link auth-required" style="display:none;"><i class="fas fa-plus-circle"></i> Report</a>
+                <a href="#dashboard" class="nav-link auth-required" style="display:none;"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="/admin" class="nav-link admin-only" style="display:none;"><i class="fas fa-shield-alt"></i> Admin</a>
+                <a href="#login" class="nav-link guest-only"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="#signup" class="btn-gradient guest-only">Get Started</a>
+                <button class="btn-gradient-danger auth-required" id="logoutBtn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <!-- Modern Hero Section -->
+    <section id="home" class="section hero-modern">
+        <div class="container">
+            <div class="hero-content-modern">
+                <div class="hero-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Trusted by thousands</span>
+                </div>
+                <h1 class="hero-title">
+                    Find What You've <span class="gradient-text">Lost</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Report lost items, search found items, and get matched automatically with our smart AI-powered system
+                </p>
+                <div class="hero-buttons">
+                    <a href="#browse" class="btn-gradient-large">
+                        <i class="fas fa-search"></i>
+                        Browse Items
+                    </a>
+                    <a href="#report" class="btn-glass auth-required" style="display:none;">
+                        <i class="fas fa-plus-circle"></i>
+                        Report Item
+                    </a>
+                    <a href="#signup" class="btn-glass guest-only">
+                        <i class="fas fa-rocket"></i>
+                        Get Started Free
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Items Found</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Happy Users</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <div class="floating-card card-1">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile</span>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-wallet"></i>
+                    <span>Wallet</span>
+                </div>
+                <div class="floating-card card-3">
+                    <i class="fas fa-key"></i>
+                    <span>Keys</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Browse Section -->
+    <section id="browse" class="section browse-modern">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-th-large"></i>
+                    Browse <span class="gradient-text">Items</span>
+                </h2>
+                <p class="section-subtitle">Find what you're looking for with our advanced filters</p>
+            </div>
+            
+            <!-- Modern Filters -->
+            <div class="filters-modern glass-card">
+                <div class="filter-group">
+                    <div class="filter-item">
+                        <label><i class="fas fa-tag"></i> Type</label>
+                        <select id="typeFilter" class="modern-select">
+                            <option value="">All Types</option>
+                            <option value="lost">Lost Items</option>
+                            <option value="found">Found Items</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <label><i class="fas fa-layer-group"></i> Category</label>
+                        <select id="categoryFilter" class="modern-select">
+                            <option value="">All Categories</option>
+                            <option value="mobile">📱 Mobile</option>
+                            <option value="wallet">👛 Wallet</option>
+                            <option value="documents">📄 Documents</option>
+                            <option value="keys">🔑 Keys</option>
+                            <option value="bag">🎒 Bag</option>
+                            <option value="electronics">💻 Electronics</option>
+                            <option value="jewelry">💎 Jewelry</option>
+                            <option value="clothing">👕 Clothing</option>
+                            <option value="other">📦 Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                        <input type="text" id="locationFilter" class="modern-input" placeholder="Enter location...">
+                    </div>
+                    
+                    <div class="filter-item">
+                        <label><i class="fas fa-search"></i> Search</label>
+                        <input type="text" id="searchFilter" class="modern-input" placeholder="Search items...">
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="btn-gradient" id="applyFilters">
+                        <i class="fas fa-filter"></i> Apply Filters
+                    </button>
+                    <button class="btn-glass-secondary" id="clearFilters">
+                        <i class="fas fa-redo"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modern Items Grid -->
+            <div id="itemsGrid" class="items-grid-modern">
+                <div class="loading-modern">
+                    <div class="spinner"></div>
+                    <p>Loading items...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Report Section -->
+    <section id="report" class="section report-modern auth-required" style="display:none;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-plus-circle"></i>
+                    Report an <span class="gradient-text">Item</span>
+                </h2>
+                <p class="section-subtitle">Help us reunite lost items with their owners</p>
+            </div>
+            <form id="reportForm" class="form-modern glass-card">
+                <div class="form-group-modern">
+                    <label class="form-label"><i class="fas fa-tag"></i> Item Type *</label>
+                    <div class="radio-group-modern">
+                        <label class="radio-card">
+                            <input type="radio" name="type" value="lost" required>
+                            <div class="radio-content">
+                                <i class="fas fa-frown"></i>
+                                <span>Lost</span>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="type" value="found" required>
+                            <div class="radio-content">
+                                <i class="fas fa-smile"></i>
+                                <span>Found</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group-modern">
+                    <label class="form-label" for="title"><i class="fas fa-heading"></i> Title *</label>
+                    <input type="text" id="title" name="title" class="modern-input" required placeholder="e.g., Black iPhone 13">
+                </div>
+
+                <div class="form-group-modern">
+                    <label class="form-label" for="description"><i class="fas fa-align-left"></i> Description *</label>
+                    <textarea id="description" name="description" class="modern-textarea" required rows="4" placeholder="Provide detailed description..."></textarea>
+                </div>
+
+                <div class="form-row-modern">
+                    <div class="form-group-modern">
+                        <label class="form-label" for="category"><i class="fas fa-layer-group"></i> Category *</label>
+                        <select id="category" name="category" class="modern-select" required>
+                            <option value="">Select Category</option>
+                            <option value="mobile">📱 Mobile</option>
+                            <option value="wallet">👛 Wallet</option>
+                            <option value="documents">📄 Documents</option>
+                            <option value="keys">🔑 Keys</option>
+                            <option value="bag">🎒 Bag</option>
+                            <option value="electronics">💻 Electronics</option>
+                            <option value="jewelry">💎 Jewelry</option>
+                            <option value="clothing">👕 Clothing</option>
+                            <option value="other">📦 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group-modern">
+                        <label class="form-label" for="location"><i class="fas fa-map-marker-alt"></i> Location *</label>
+                        <input type="text" id="location" name="location" class="modern-input" required placeholder="e.g., Central Park">
+                    </div>
+                </div>
+
+                <div class="form-group-modern">
+                    <label class="form-label" for="date"><i class="fas fa-calendar"></i> Date *</label>
+                    <input type="date" id="date" name="date" class="modern-input" required>
+                </div>
+
+                <div class="form-group-modern">
+                    <label class="form-label" for="image"><i class="fas fa-image"></i> Upload Image (Optional)</label>
+                    <div class="file-upload-modern">
+                        <input type="file" id="image" name="image" accept="image/*" hidden>
+                        <label for="image" class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click to upload or drag and drop</span>
+                            <small>Max size: 5MB. Formats: JPG, PNG, GIF</small>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-gradient-large btn-block">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Report
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Modern Dashboard Section -->
+    <section id="dashboard" class="section dashboard-modern auth-required" style="display:none;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i>
+                    My <span class="gradient-text">Dashboard</span>
+                </h2>
+                <p class="section-subtitle">Track your reported items and matches</p>
+            </div>
+            
+            <div class="dashboard-stats-modern">
+                <div class="stat-card-modern glass-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalItems" class="stat-number">0</h3>
+                        <p class="stat-label">Total Items</p>
+                    </div>
+                </div>
+                <div class="stat-card-modern glass-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="matchedItems" class="stat-number">0</h3>
+                        <p class="stat-label">Matched Items</p>
+                    </div>
+                </div>
+                <div class="stat-card-modern glass-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="activeItems" class="stat-number">0</h3>
+                        <p class="stat-label">Active Items</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section-title">
+                <h3><i class="fas fa-list"></i> My Reported Items</h3>
+            </div>
+            <div id="myItemsGrid" class="items-grid-modern">
+                <div class="loading-modern">
+                    <div class="spinner"></div>
+                    <p>Loading your items...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Login Section -->
+    <section id="login" class="section auth-modern guest-only">
+        <div class="container">
+            <div class="auth-container-modern glass-card">
+                <div class="auth-header">
+                    <div class="auth-icon">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </div>
+                    <h2>Welcome Back</h2>
+                    <p>Login to access your dashboard</p>
+                </div>
+                <form id="loginForm" class="form-modern">
+                    <div class="form-group-modern">
+                        <label class="form-label" for="loginEmail"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="loginEmail" class="modern-input" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group-modern">
+                        <label class="form-label" for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" class="modern-input" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn-gradient-large btn-block">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login to Dashboard
+                    </button>
+                </form>
+                <p class="auth-switch-modern">Don't have an account? <a href="#signup" class="gradient-link">Sign up now</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Signup Section -->
+    <section id="signup" class="section auth-modern guest-only">
+        <div class="container">
+            <div class="auth-container-modern glass-card">
+                <div class="auth-header">
+                    <div class="auth-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h2>Create Account</h2>
+                    <p>Join us and start finding your items</p>
+                </div>
+                <form id="signupForm" class="form-modern">
+                    <div class="form-group-modern">
+                        <label class="form-label" for="signupName"><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="signupName" class="modern-input" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group-modern">
+                        <label class="form-label" for="signupEmail"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="signupEmail" class="modern-input" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group-modern">
+                        <label class="form-label" for="signupPhone"><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="signupPhone" class="modern-input" required placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group-modern">
+                        <label class="form-label" for="signupPassword"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="signupPassword" class="modern-input" required minlength="6" placeholder="Create a password">
+                        <small class="form-hint">Minimum 6 characters</small>
+                    </div>
+                    <button type="submit" class="btn-gradient-large btn-block">
+                        <i class="fas fa-rocket"></i>
+                        Create Account
+                    </button>
+                </form>
+                <p class="auth-switch-modern">Already have an account? <a href="#login" class="gradient-link">Login here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Modal for Item Details -->
+    <div id="itemModal" class="modal-modern">
+        <div class="modal-overlay"></div>
+        <div class="modal-content-modern glass-card">
+            <button class="modal-close" id="modalCloseBtn"><i class="fas fa-times"></i></button>
+            <div id="modalBody" class="modal-body-modern"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <i class="fas fa-search-location"></i>
+                Lost<span style="background:linear-gradient(135deg,#fb7185,#9333ea);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">&Found</span>
+            </div>
+            <p>&copy; 2026 Lost &amp; Found System. All rights reserved.</p>
+            <p class="footer-sub">Helping reunite people with their belongings.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

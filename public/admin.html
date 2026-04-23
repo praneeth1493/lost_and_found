@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Lost & Found System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <i class="fas fa-shield-alt"></i>
+        <span>Admin Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active" data-tab="overview">
+            <i class="fas fa-tachometer-alt"></i> Overview
+        </a>
+        <a href="#" class="sidebar-link" data-tab="users">
+            <i class="fas fa-users"></i> Users
+        </a>
+        <a href="#" class="sidebar-link" data-tab="items">
+            <i class="fas fa-box-open"></i> Items
+        </a>
+        <a href="/" class="sidebar-link">
+            <i class="fas fa-arrow-left"></i> Back to Site
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="admin-info" id="adminInfo">
+            <i class="fas fa-user-shield"></i>
+            <span id="adminName">Admin</span>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="topbar-title" id="pageTitle">Overview</h1>
+        <div class="topbar-right">
+            <span class="badge-admin"><i class="fas fa-shield-alt"></i> Admin</span>
+        </div>
+    </header>
+
+    <!-- Notification -->
+    <div id="adminNotif"></div>
+
+    <!-- ── OVERVIEW TAB ── -->
+    <section class="tab-content active" id="tab-overview">
+        <div class="stats-grid">
+            <div class="stat-box" style="--accent:#667eea;">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-body">
+                    <h2 id="s-users">—</h2>
+                    <p>Total Users</p>
+                </div>
+            </div>
+            <div class="stat-box" style="--accent:#f5576c;">
+                <div class="stat-icon"><i class="fas fa-box-open"></i></div>
+                <div class="stat-body">
+                    <h2 id="s-items">—</h2>
+                    <p>Total Items</p>
+                </div>
+            </div>
+            <div class="stat-box" style="--accent:#4facfe;">
+                <div class="stat-icon"><i class="fas fa-search"></i></div>
+                <div class="stat-body">
+                    <h2 id="s-lost">—</h2>
+                    <p>Lost Items</p>
+                </div>
+            </div>
+            <div class="stat-box" style="--accent:#00f2fe;">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-body">
+                    <h2 id="s-found">—</h2>
+                    <p>Found Items</p>
+                </div>
+            </div>
+            <div class="stat-box" style="--accent:#f093fb;">
+                <div class="stat-icon"><i class="fas fa-link"></i></div>
+                <div class="stat-body">
+                    <h2 id="s-matched">—</h2>
+                    <p>Matched</p>
+                </div>
+            </div>
+            <div class="stat-box" style="--accent:#ffd89b;">
+                <div class="stat-icon"><i class="fas fa-flag-checkered"></i></div>
+                <div class="stat-body">
+                    <h2 id="s-resolved">—</h2>
+                    <p>Resolved</p>
+                </div>
+            </div>
+            <div class="stat-box" style="--accent:#43e97b;">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-body">
+                    <h2 id="s-active">—</h2>
+                    <p>Active Items</p>
+                </div>
+            </div>
+            <div class="stat-box" style="--accent:#e74c3c;">
+                <div class="stat-icon"><i class="fas fa-ban"></i></div>
+                <div class="stat-body">
+                    <h2 id="s-blocked">—</h2>
+                    <p>Blocked Users</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── USERS TAB ── -->
+    <section class="tab-content" id="tab-users">
+        <div class="panel-header">
+            <h2><i class="fas fa-users"></i> Manage Users</h2>
+            <button class="btn-refresh" onclick="loadUsers()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </div>
+        <div class="table-wrap">
+            <table class="admin-table" id="usersTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Items</th>
+                        <th>Status</th>
+                        <th>Joined</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersBody">
+                    <tr><td colspan="8" class="loading-row"><div class="spinner-sm"></div> Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ── ITEMS TAB ── -->
+    <section class="tab-content" id="tab-items">
+        <div class="panel-header">
+            <h2><i class="fas fa-box-open"></i> Manage Items</h2>
+            <div class="panel-filters">
+                <select id="itemTypeFilter" class="filter-select" onchange="loadItems()">
+                    <option value="">All Types</option>
+                    <option value="lost">Lost</option>
+                    <option value="found">Found</option>
+                </select>
+                <select id="itemStatusFilter" class="filter-select" onchange="loadItems()">
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="matched">Matched</option>
+                    <option value="resolved">Resolved</option>
+                </select>
+                <input type="text" id="itemSearch" class="filter-input" placeholder="Search title / location…" oninput="loadItems()">
+                <button class="btn-refresh" onclick="loadItems()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table class="admin-table" id="itemsTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Location</th>
+                        <th>Reported By</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="itemsBody">
+                    <tr><td colspan="9" class="loading-row"><div class="spinner-sm"></div> Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div><!-- /main-content -->
+
+<!-- Confirm Delete Modal -->
+<div class="confirm-modal" id="confirmModal">
+    <div class="confirm-box">
+        <div class="confirm-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <h3 id="confirmTitle">Are you sure?</h3>
+        <p id="confirmMsg">This action cannot be undone.</p>
+        <div class="confirm-actions">
+            <button class="btn-cancel" id="confirmCancel">Cancel</button>
+            <button class="btn-confirm-delete" id="confirmOk">Delete</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
