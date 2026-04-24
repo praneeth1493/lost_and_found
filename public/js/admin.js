@@ -2,7 +2,7 @@
 // ADMIN PANEL — JavaScript
 // ============================================
 
-const API = 'http://localhost:5000/api/admin';
+const API = window.location.origin + '/api/admin';
 
 // ── Auth guard: redirect if not admin ──────
 const token = localStorage.getItem('token');

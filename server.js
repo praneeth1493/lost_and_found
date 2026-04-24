@@ -36,9 +36,23 @@ app.use('/uploads', express.static('uploads'));
 app.set('io', io);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI)
+// mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 10000,
+  socketTimeoutMS: 45000,
+})
 .then(() => console.log('✅ MongoDB Connected Successfully'))
 .catch(err => console.error('❌ MongoDB Connection Error:', err));
+
+// Auto-reconnect on disconnect
+mongoose.connection.on('disconnected', () => {
+  console.warn('⚠️  MongoDB disconnected — retrying in 5s...');
+  setTimeout(() => mongoose.connect(process.env.MONGODB_URI), 5000);
+});
+
+mongoose.connection.on('error', err => {
+  console.error('❌ MongoDB error:', err);
+});
 
 // Routes
 app.use('/api/auth',  authRoutes);
