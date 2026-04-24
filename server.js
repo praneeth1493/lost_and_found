@@ -47,7 +47,7 @@ mongoose.connect(process.env.MONGO_URI, {
 // Auto-reconnect on disconnect
 mongoose.connection.on('disconnected', () => {
   console.warn('⚠️  MongoDB disconnected — retrying in 5s...');
-  setTimeout(() => mongoose.connect(process.env.MONGODB_URI), 5000);
+  setTimeout(() => mongoose.connect(process.env.MONGO_URI), 5000);
 });
 
 mongoose.connection.on('error', err => {
