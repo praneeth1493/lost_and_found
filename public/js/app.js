@@ -96,6 +96,10 @@ async function handleLogin(e) {
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
 
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
     try {
         const res = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
@@ -115,8 +119,12 @@ async function handleLogin(e) {
         } else {
             showNotification(data.message || 'Login failed', 'error');
         }
-    } catch {
-        showNotification('Login failed. Is the server running?', 'error');
+    } catch (err) {
+        console.error('Login fetch error:', err);
+        showNotification('Server is waking up, please wait 30 seconds and try again...', 'warning');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
     }
 }
 
@@ -129,6 +137,10 @@ async function handleSignup(e) {
     const email = document.getElementById('signupEmail').value;
     const phone = document.getElementById('signupPhone').value;
     const password = document.getElementById('signupPassword').value;
+
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
 
     try {
         const res = await fetch(`${API_URL}/auth/signup`, {
@@ -149,8 +161,12 @@ async function handleSignup(e) {
         } else {
             showNotification(data.message || 'Signup failed', 'error');
         }
-    } catch {
-        showNotification('Signup failed. Is the server running?', 'error');
+    } catch (err) {
+        console.error('Signup fetch error:', err);
+        showNotification('Server is waking up, please wait 30 seconds and try again...', 'warning');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-rocket"></i> Create Account';
     }
 }
 
