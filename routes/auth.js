@@ -51,9 +51,10 @@ router.post('/signup', async (req, res) => {
       }
     });
   } catch (error) {
+    console.error('Signup error:', error.message);
     res.status(500).json({
       success: false,
-      message: 'Error registering user',
+      message: error.message || 'Error registering user',
       error: error.message
     });
   }
