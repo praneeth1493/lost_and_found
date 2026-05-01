@@ -29,7 +29,7 @@ const io = socketIO(server, {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/uploads', express.static('uploads'));
 
 // Make io accessible to routes
@@ -85,10 +85,10 @@ app.get('/api/health', (req, res) => {
 
 // Admin panel page
 app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+  res.sendFile(path.join(__dirname, '../frontend', 'admin.html'));
 });
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
 // Error handling middleware
